@@ -16,7 +16,7 @@ O Container Runtime é necessário para executar os containers nos nós, podendo
 
 Kubernetes é uma plataforma de código aberto para automação, implantação, escalonamento e gerenciamento de aplicativos em contêineres. Ele fornece uma estrutura para implantar aplicativos em vários hosts, oferecendo recursos como balanceamento de carga, auto-recuperação e dimensionamento automático, facilitando a orquestração eficiente de contêineres em ambientes de nuvem e em infraestruturas locais.
 
-## _Arquitetura do Kubernetes
+## Arquitetura do Kubernetes
 
 A arquitetura do Kubernetes é composta por vários componentes que trabalham juntos para fornecer uma plataforma de orquestração de contêineres. Os principais componentes incluem:
 
@@ -28,15 +28,21 @@ A arquitetura do Kubernetes é composta por vários componentes que trabalham ju
 **etcd:** Um armazenamento de chave-valor consistente usado para armazenar o estado do cluster Kubernetes.
 
 **Node(s)/Workers:** São as máquinas individuais (físicas ou virtuais) que compõem o cluster Kubernetes. Cada nó executa os seguintes componentes:
+
 **Kubelet:** Agente que executa nos nós e gerencia os pods e seus contêineres.
+
 **Kube-proxy:** Responsável por encaminhar o tráfego de rede para os pods.
+
 **Container Runtime:** O software responsável por executar os contêineres, como Docker ou containerd.
 
 Além desses componentes principais, há outros recursos e objetos no Kubernetes, como:
 
 **Pods:** Um grupo de um ou mais contêineres que compartilham armazenamento e uma única configuração de rede. É a menor unidade implantável no Kubernetes.
+
 **Service:** Define um conjunto lógico de pods e uma política de acesso a eles.
+
 **Namespace:** Um mecanismo para dividir recursos de cluster entre vários usuários ou finalidades.
+
 **Deployment:** Gerencia a implantação de aplicativos em contêineres, permitindo atualizações sem tempo de inatividade.
 
 Esses componentes trabalham juntos para facilitar a implantação, escalonamento e gerenciamento de aplicativos em contêineres em ambientes Kubernetes.
