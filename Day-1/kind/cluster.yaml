@@ -1,10 +1,14 @@
-#Kind é o tipo do serviço que quer criar
+# Kind é o tipo do serviço que quer criar
 kind: Cluster
-#versão que ele vai criar o serviço
+
+# Versão que ele vai criar o serviço
 apiVersion: kind.x-k8s.io/v1alpha4
 
+# Configuração dos nós do cluster
 nodes:
+  # Nó com papel de control-plane (nó mestre)
   - role: control-plane
+  # Nó com papel de worker (nó de trabalho)
   - role: worker
-  - role: worker    
-      
+  # Outro nó com papel de worker (nó de trabalho)
+  - role: worker

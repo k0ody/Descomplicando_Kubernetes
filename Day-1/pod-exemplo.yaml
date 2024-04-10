@@ -1,21 +1,33 @@
-# versao da api que ta controlando
+# Versão da API que está sendo controlada
 apiVersion: v1
-# o que eu quero criar
+
+# Tipo de recurso que está sendo criado (nesse caso, um Pod)
 kind: Pod
-# informações do pod
+
+# Metadados do Pod, incluindo nome e rótulos
 metadata:
-  creationTimestamp: null
+  # Rótulos atribuídos ao Pod, identificado como "nginx"
   labels:
     run: nginx
+  # Nome do Pod é "nginx"
   name: nginx
-# especificaçãoes desse pod
+
+# Especificações do Pod, incluindo contêineres
 spec:
+  # Lista de contêineres no Pod
   containers:
-  - image: nginx
+  - 
+    # Imagem usada para o contêiner
+    image: nginx
+    # Nome do contêiner é "nginx"
     name: nginx
+    # Porta que o contêiner está expondo (porta 80)
     ports:
     - containerPort: 80
+    # Recursos alocados para o contêiner (nenhum especificado)
     resources: {}
+
+  # Política DNS do Pod (ClusterFirst)
   dnsPolicy: ClusterFirst
+  # Política de reinicialização do Pod (Always)
   restartPolicy: Always
-status: {}
