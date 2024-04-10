@@ -1,0 +1,10 @@
+#Kind é o tipo do serviço que quer criar
+kind: Cluster
+#versão que ele vai criar o serviço
+apiVersion: kind.x-k8s.io/v1alpha4
+
+nodes:
+  - role: control-plane
+  - role: worker
+  - role: worker    
+      

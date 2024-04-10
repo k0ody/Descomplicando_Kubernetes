@@ -1,0 +1,21 @@
+# versao da api que ta controlando
+apiVersion: v1
+# o que eu quero criar
+kind: Pod
+# informações do pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx
+  name: nginx
+# especificaçãoes desse pod
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    ports:
+    - containerPort: 80
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
