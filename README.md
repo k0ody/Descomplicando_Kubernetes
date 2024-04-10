@@ -1,3 +1,3 @@
 # Descomplicando Kubernetes
 
-**Repositorio referente ao PICK (Programa Intencivo de Cointainer e Kubernetes)**
+**Repositorio referente ao PICK (Programa Intensivo em Containers e Kubernetes)**
