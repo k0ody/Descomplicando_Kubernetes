@@ -1,0 +1,37 @@
+# Api que esta rodando, v1 mais estavel
+apiVersion: v1
+# O que quero rodar
+kind: Pod
+# Informações relacionadas ao pod
+metadata:
+  # São pares de chave-valor que podem ser usados para identificar e selecionar objetos Kubernetes
+  labels:
+    run: giropops
+  # nome do pod
+  name: giropops-limited
+# Especificações do pod
+spec:
+  containers:
+  # Imagem
+  - image: ubuntu
+    # Nome do container
+    name: ubuntu
+    # Limitação de recursos
+    resources:
+      # Limites máximos de recursos que o container pode consumir.
+      limits:
+        cpu: "0.5"
+        memory: "128Mi"
+      # Recursos mínimos que o container precisa para ser executado corretamente
+      requests:
+        cpu: "0.3"
+        memory: "64Mi"
+    # Especificar os argumentos que serão passados para o comando principal do container quando ele for iniciado
+    args:
+    - sleep
+    - "1800"
+
+  # Define a política DNS para o Pod. "ClusterFirst" indica que o DNS do cluster deve ser consultado primeiro
+  dnsPolicy: ClusterFirst
+  # Define a política de reinicialização do Pod. "Always" indica que o Pod deve ser reiniciado sempre que falhar
+  restartPolicy: Always
