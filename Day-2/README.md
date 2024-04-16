@@ -95,7 +95,7 @@ spec:
     # porta 80 exposta pelo container
     - containerPort: 80
 ```
-**Aplicar o arquivo pod.yaml usaro o `kubectl apply`:
+**Aplicar o arquivo pod.yaml usaro o `kubectl apply`:**
 
 ```
 kubectl apply -f pod.yaml
@@ -116,7 +116,7 @@ O comando kubectl apply é preferível ao kubectl create porque pode ser usado p
 **Comando Attach e Exec**
 
 
-** Comando `kubectl attach`:**
+**Comando `kubectl attach`:**
 - O comando `kubectl attach` é usado para conectar o terminal local ao terminal de um contêiner em execução dentro de um Pod.
 - Ele fornece uma interface interativa para interagir diretamente com um contêiner em execução, permitindo a visualização e a entrada de comandos.
 - O comando `attach` é útil para depuração, monitoramento ou interações em tempo real com um contêiner.
@@ -142,7 +142,7 @@ kubectl exec -it nome-do-pod -- comando-a-executar
 ```
 
 
-**LImitando recusros no Pod**
+**Limitando recusros no Pod**
 
 Segue abaixo um exemplo de como limitar recursos no pod:
 
