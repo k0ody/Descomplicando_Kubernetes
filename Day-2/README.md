@@ -238,36 +238,36 @@ spec:
       sizeLimit: 256Mi
 ```
 
-volumeMounts:
-  # Define os pontos de montagem dentro do contêiner.
-  - mountPath: /giropops
-    # Especifica o caminho de montagem dentro do contêiner.
-    # Este ponto de montagem será onde o volume será montado dentro do contêiner.
-    # Neste caso, o volume será montado em /giropops dentro do contêiner.
-    # Todos os arquivos e diretórios dentro deste caminho no contêiner estarão vinculados ao volume.
-    # Qualquer conteúdo pré-existente neste caminho dentro do contêiner será ocultado pelo conteúdo do volume.
-    # É possível definir vários pontos de montagem se necessário.
-    # Cada ponto de montagem é especificado como um item de uma lista.
+**volumeMounts:** Define os pontos de montagem dentro do contêiner.
 
-  name: primeiro-emptydir
-    # Nome do volume a ser montado.
-    # Este é o nome do volume definido no campo 'volumes'.
-    # Este volume será montado no ponto de montagem especificado no contêiner.
+**mountPath:** /giropops
+ Especifica o caminho de montagem dentro do contêiner.
+ Este ponto de montagem será onde o volume será montado dentro do contêiner.
+ Neste caso, o volume será montado em /giropops dentro do contêiner.
+ Todos os arquivos e diretórios dentro deste caminho no contêiner estarão vinculados ao volume.
+ Qualquer conteúdo pré-existente neste caminho dentro do contêiner será ocultado pelo conteúdo do volume.
+ É possível definir vários pontos de montagem se necessário.
+ Cada ponto de montagem é especificado como um item de uma lista.
 
-volumes:
-  # Define os volumes disponíveis para o Pod.
-  # Cada volume pode ser montado em um ou mais contêineres no Pod.
-  # Neste caso, é definido um único volume chamado 'primeiro-emptydir'.
+**name:** primeiro-emptydir
+ Nome do volume a ser montado.
+ Este é o nome do volume definido no campo 'volumes'.
+ Este volume será montado no ponto de montagem especificado no contêiner.
 
-  - name: primeiro-emptydir
-    # Nome do volume que será criado e montado.
-    # Este nome será usado para associar o volume aos pontos de montagem nos contêineres.
+**volumes:**
+ Define os volumes disponíveis para o Pod.
+ Cada volume pode ser montado em um ou mais contêineres no Pod.
+ Neste caso, é definido um único volume chamado 'primeiro-emptydir'.
 
-    emptyDir:
-      # Define um tipo de volume 'emptyDir', que é um diretório vazio.
-      # Este tipo de volume é criado quando o Pod é iniciado e é efêmero, o que significa que
-      # qualquer conteúdo armazenado dentro dele será perdido quando o Pod for excluído ou reiniciado.
+**name:** primeiro-emptydir
+ Nome do volume que será criado e montado.
+ Este nome será usado para associar o volume aos pontos de montagem nos contêineres.
 
-      sizeLimit: 256Mi
-        # Opcional. Define um limite de tamanho para o diretório vazio.
-        # Neste caso, o diretório vazio criado pelo volume 'primeiro-emptydir' terá um limite máximo de tamanho de 256 megabytes.
+**emptyDir:**
+ Define um tipo de volume 'emptyDir', que é um diretório vazio.
+ Este tipo de volume é criado quando o Pod é iniciado e é efêmero, o que significa que
+ qualquer conteúdo armazenado dentro dele será perdido quando o Pod for excluído ou reiniciado.
+
+**sizeLimit:** 256Mi
+ Opcional. Define um limite de tamanho para o diretório vazio.
+ Neste caso, o diretório vazio criado pelo volume 'primeiro-emptydir' terá um limite máximo de tamanho de 256 megabytes.
