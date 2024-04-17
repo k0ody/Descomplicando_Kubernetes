@@ -1,37 +1,20 @@
-# Api que esta rodando, v1 mais estavel
-apiVersion: v1
-# O que quero rodar
-kind: Pod
-# Informações relacionadas ao pod
-metadata:
-  # São pares de chave-valor que podem ser usados para identificar e selecionar objetos Kubernetes
-  labels:
-    run: girus
-    service: webserver
-  # nome do pod
-  name: girus
-# Especificações do pod
-spec:
-  containers:
-  # Imagem
-  - image: nginx
-    # Nome do container
-    name: girus
-    # Limitação de recursos
-    resources: {}
-
-  - image: busybox
-    name: busybox
-    # Especificar os argumentos que serão passados para o comando principal do container quando ele for iniciado
-    args: 
-    - sleep
-    - "600"
-    
-    
-    resources: {}
-
-
-  # Define a política DNS para o Pod. "ClusterFirst" indica que o DNS do cluster deve ser consultado primeiro
-  dnsPolicy: ClusterFirst
-  # Define a política de reinicialização do Pod. "Always" indica que o Pod deve ser reiniciado sempre que falhar
-  restartPolicy: Always
+apiVersion: v1 # Indica a versão da API Kubernetes que está sendo usada.
+kind: Pod # Define o tipo de recurso, neste caso, é um Pod.
+metadata: # Metadados para identificar e descrever o recurso.
+  labels: # Etiquetas para identificar o Pod.
+    run: girus # Etiqueta "run" com o valor "girus".
+    service: webserver # Etiqueta "service" com o valor "webserver".
+  name: girus # Nome do Pod, neste caso, é "girus".
+spec: # Especificação do Pod.
+  containers: # Lista de contêineres no Pod.
+  - image: nginx # Primeiro contêiner: usa a imagem do nginx.
+    name: girus # Nome do primeiro contêiner.
+    resources: {} # Recursos alocados para o primeiro contêiner (nenhum recurso especificado aqui).
+  - image: busybox # Segundo contêiner: usa a imagem do busybox.
+    name: busybox # Nome do segundo contêiner.
+    args: # Argumentos do contêiner busybox.
+    - sleep # Comando sleep para manter o contêiner ocupado.
+    - "600" # Argumento para dormir por 600 segundos (10 minutos).
+    resources: {} # Recursos alocados para o segundo contêiner (nenhum recurso especificado aqui).
+  dnsPolicy: ClusterFirst # Política de DNS para o Pod.
+  restartPolicy: Always # Política de reinicialização do Pod (sempre reiniciar em caso de falha).

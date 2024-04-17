@@ -117,6 +117,18 @@ kind create cluster --config <nome do arquivo.yaml> --name <nome do cluester>
 
 O kubectl é uma ferramenta de linha de comando para interagir com clusters Kubernetes, permitindo aos usuários gerenciar e operar recursos do Kubernetes, como implantações de aplicativos, escalabilidade e monitoramento.
 
+Para instalar o kubectl no linux:
+
+```
+curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+
+chmod +x ./kubectl
+
+sudo mv ./kubectl /usr/local/bin/kubectl
+
+kubectl version --client
+```
+
 Abaixo os comandos mais usados:
 
 1. **kubectl create**:
@@ -141,7 +153,7 @@ Abaixo os comandos mais usados:
 
 6. **kubectl exec**:
    - Descrição: Executa um comando em um contêiner em execução em um pod.
-   - Exemplo de uso: `kubectl exec -it nome-do-pod -- comando`
+   - Exemplo de uso: `kubectl exec -it nome-do-pod -- bash`
 
 7. **kubectl delete**:
    - Descrição: Deleta um ou mais recursos Kubernetes.

@@ -1,0 +1,33 @@
+apiVersion: apps/v1 # Indica a versão da API Kubernetes que está sendo usada.
+kind: Deployment # Define o tipo de recurso, neste caso, é uma implantação (Deployment).
+metadata: # Metadados para identificar e descrever o recurso.
+  labels: # Etiquetas para identificar o recurso.
+    app: nginx-deployment # Etiqueta "app" com o valor "nginx-deployment".
+  name: nginx-deployment # Nome da implantação.
+  namespace: giropops # Namespace onde a implantação será criada.
+spec: # Especificação da implantação.
+  replicas: 10 # Número de réplicas desejadas da aplicação.
+  selector: # Seleciona Pods com base em determinados critérios.
+    matchLabels: # Corresponde às etiquetas dos Pods.
+      app: nginx-deployment # Seleciona Pods com a etiqueta "app" igual a "nginx-deployment".
+  strategy: # Estratégia de atualização da implantação.
+    type: RollingUpdate # Tipo de estratégia de atualização, neste caso, é RollingUpdate (atualização contínua).
+    rollingUpdate: # Configurações específicas para atualização contínua.
+      maxSurge: 10% # Número máximo de Pods adicionais durante a atualização.
+      maxUnavailable: 25% # Porcentagem máxima de Pods que podem estar indisponíveis durante a atualização.
+
+  template: # Modelo para criar novos Pods.
+    metadata: # Metadados do Pod.
+      labels: # Etiquetas do Pod.
+        app: nginx-deployment # Etiqueta "app" com o valor "nginx-deployment".
+    spec: # Especificação do Pod.
+      containers: # Lista de contêineres no Pod.
+      - image: nginx:1.16.0 # Imagem do contêiner, neste caso, nginx na versão 1.16.0.
+        name: nginx # Nome do contêiner.
+        resources: # Recursos alocados para o contêiner.
+          limits: # Limites máximos de recursos que o contêiner pode usar.
+            cpu: "0.5" # Limite máximo de uso de CPU.
+            memory: 256Mi # Limite máximo de uso de memória.
+          requests: # Recursos mínimos que o contêiner precisa.
+            cpu: "0.3" # Quantidade mínima de CPU necessária.
+            memory: 64Mi # Quantidade mínima de memória necessária.

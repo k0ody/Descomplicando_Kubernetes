@@ -1,0 +1,23 @@
+apiVersion: apps/v1 # Indica a versão da API Kubernetes que está sendo usada.
+kind: Deployment # Define o tipo de recurso, neste caso, é uma implantação (Deployment).
+metadata: # Metadados para identificar e descrever o recurso.
+  labels: # Etiquetas para identificar o recurso.
+    app: nginx-deployment2 # Etiqueta "app" com o valor "nginx-deployment2".
+  name: nginx-deployment2 # Nome da implantação.
+spec: # Especificação da implantação.
+  replicas: 3 # Número de réplicas desejadas da aplicação.
+  selector: # Seleciona Pods com base em determinados critérios.
+    matchLabels: # Corresponde às etiquetas dos Pods.
+      app: nginx-deployment2 # Seleciona Pods com a etiqueta "app" igual a "nginx-deployment2".
+  strategy: {} # Estratégia de atualização da implantação (nenhuma estratégia definida aqui).
+
+  template: # Modelo para criar novos Pods.
+    metadata: # Metadados do Pod.
+      labels: # Etiquetas do Pod.
+        app: nginx-deployment2 # Etiqueta "app" com o valor "nginx-deployment2".
+    spec: # Especificação do Pod.
+      containers: # Lista de contêineres no Pod.
+      - image: nginx # Imagem do contêiner, neste caso, nginx.
+        name: nginx # Nome do contêiner.
+        resources: {} # Recursos alocados para o contêiner (nenhum recurso especificado aqui).
+

@@ -1,0 +1,31 @@
+apiVersion: apps/v1 # Indica a versão da API Kubernetes que está sendo usada.
+kind: Deployment # Define o tipo de recurso, neste caso, é uma implantação (Deployment).
+metadata: # Metadados para identificar e descrever o recurso.
+  labels: # Etiquetas para identificar o recurso.
+    app: nginx-deployment # Etiqueta "app" com o valor "nginx-deployment".
+  name: nginx-deployment # Nome da implantação.
+  namespace: giropops # Namespace onde a implantação será criada.
+spec: # Especificação da implantação.
+  replicas: 15 # Número de réplicas desejadas da aplicação.
+  revisionHistoryLimit: 10 # Número máximo de revisões mantidas para a implantação.
+  selector: # Seleciona Pods com base em determinados critérios.
+    matchLabels: # Corresponde às etiquetas dos Pods.
+      app: nginx-deployment # Seleciona Pods com a etiqueta "app" igual a "nginx-deployment".
+  strategy: # Estratégia de atualização da implantação.
+    type: Recreate # Tipo de estratégia de atualização, neste caso, é Recreate (recriação).
+
+  template: # Modelo para criar novos Pods.
+    metadata: # Metadados do Pod.
+      labels: # Etiquetas do Pod.
+        app: nginx-deployment # Etiqueta "app" com o valor "nginx-deployment".
+    spec: # Especificação do Pod.
+      containers: # Lista de contêineres no Pod.
+      - image: nginx:1.15.0 # Imagem do contêiner, neste caso, nginx na versão 1.15.0.
+        name: nginx-opa # Nome do contêiner.
+        resources: # Recursos alocados para o contêiner.
+          limits: # Limites máximos de recursos que o contêiner pode usar.
+            cpu: "0.7" # Limite máximo de uso de CPU.
+            memory: 256Mi # Limite máximo de uso de memória.
+          requests: # Recursos mínimos que o contêiner precisa.
+            cpu: "0.3" # Quantidade mínima de CPU necessária.
+            memory: 64Mi # Quantidade mínima de memória necessária.
