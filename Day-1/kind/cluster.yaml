@@ -10,5 +10,5 @@ nodes:
   - role: control-plane
   # Nó com papel de worker (nó de trabalho)
   - role: worker
-
+  - role: worker
   

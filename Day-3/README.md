@@ -52,7 +52,7 @@ spec:                 # Especificações do Deployment
 
 ```
 
-**Para aplicar o deplpyment:**
+**Para aplicar o deployment:**
 
 ```
 kubectl apply -f deployment.yaml
@@ -153,7 +153,7 @@ spec:
             memory: 128Mi
 ```
 
-Onde foi adicionado os campos:
+Foi adicionado os campos:
 
 ```
 strategy:
@@ -211,7 +211,7 @@ spec:
             memory: 128Mi
 ```
 
-O compo que foi adiciona:
+O compo que foi adicionado:
 
 ```
   strategy:
