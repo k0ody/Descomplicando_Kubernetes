@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: apache-deployment
+  name: apache-deployment
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: apache-deployment
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: apache-deployment
+    spec:
+      containers:
+        - name: apache
+          image: httpd:2.4
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: "1"
+              memory: "256Mi"
+            requests:
+              cpu: "0.5"
+              memory: "128Mi"
+          livenessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 3
+            successThreshold: 3
+          readinessProbe:
+            exec:
+              command:
+                - curl
+                - -f
+                - http://localhost:80/
+            initialDelaySeconds: 10
+            periodSeconds: 15
+            failureThreshold: 3
+            successThreshold: 3
+
+        
+    
