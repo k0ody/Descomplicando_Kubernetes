@@ -1,0 +1,46 @@
+apiVersion: apps/v1  # Versão da API do Kubernetes utilizada para criar este recurso.
+kind: Deployment  # Tipo de recurso do Kubernetes responsável por gerenciar um conjunto de réplicas de um aplicativo.
+metadata:  # Metadados do Deployment.
+  labels:  # Rótulos aplicados ao Deployment para identificação.
+    app: nginx-deployment  # Rótulo "app" com o valor "nginx-deployment".
+  name: nginx-deployment  # Nome do Deployment.
+spec:  # Especificações do Deployment.
+  replicas: 1  # Número de réplicas desejadas para o aplicativo.
+  selector:  # Seleciona os pods gerenciados por este Deployment.
+    matchLabels:  # Define as correspondências de rótulos para selecionar os pods.
+      app: nginx-deployment  # Corresponde ao rótulo "app" com o valor "nginx-deployment".
+  strategy: {}  # Estratégia de atualização do Deployment (não especificada neste caso, o que significa que será usado o padrão).
+  template:  # Template para os pods gerados pelo Deployment.
+    metadata:  # Metadados do pod template.
+      labels:  # Rótulos aplicados aos pods criados.
+        app: nginx-deployment  # Rótulo "app" com o valor "nginx-deployment".
+    spec:  # Especificações do pod template.
+      containers:  # Lista de containers no pod.
+        - name: nginx-deployment  # Nome do container.
+          image: nginx:1.19  # Imagem do container a ser usada.
+          resources:  # Recursos de computação atribuídos ao container.
+            limits:  # Limites máximos de recursos que o container pode usar.
+              cpu: "0.5"  # Limite máximo de uso de CPU pelo container.
+              memory: 256Mi  # Limite máximo de uso de memória pelo container.
+            requests:  # Recursos mínimos requeridos pelo container.
+              cpu: "0.25"  # Quantidade mínima de CPU solicitada pelo container.
+              memory: 128Mi  # Quantidade mínima de memória solicitada pelo container.
+          livenessProbe:  # Sonda de verificação de integridade do pod.
+            httpGet:  # Tipo de sonda que faz uma requisição HTTP para verificar a integridade do pod.
+              path: /  # Caminho da requisição HTTP.
+              port: 80  # Porta onde o serviço está escutando no container.
+            initialDelaySeconds: 10  # Tempo em segundos antes da primeira execução da sonda.
+            periodSeconds: 10  # Intervalo em segundos entre as execuções da sonda.
+            timeoutSeconds: 5  # Tempo máximo em segundos permitido para a sonda verificar o pod.
+            failureThreshold: 3  # Número de vezes que a sonda precisa falhar para considerar que o pod falhou.
+          readinessProbe:  # Sonda de verificação de prontidão do pod.
+            exec:  # Tipo de sonda que executa um comando dentro do container para verificar a prontidão.
+              command:  # Comando a ser executado dentro do container.
+                - curl
+                - -f
+                - http://localhost:80/
+            initialDelaySeconds: 10  # Tempo em segundos antes da primeira execução da sonda.
+            periodSeconds: 10  # Intervalo em segundos entre as execuções da sonda.
+            timeoutSeconds: 5  # Tempo máximo em segundos permitido para a sonda verificar o pod.
+            failureThreshold: 3  # Número de vezes que a sonda precisa falhar para considerar que o pod não está pronto.
+            successThreshold: 1  # Número de vezes que a sonda precisa passar para considerar que o pod está pronto.

@@ -1,0 +1,38 @@
+apiVersion: apps/v1 #Versao da API do kubernetes utilizada para criar este recurso
+kind: DaemonSet #Tipo do recurso kubernetes que garante que uma copia de um pod seja executada em cada nó
+metadata: #metadados do daemonset
+  labels: #Rotulos aplicados ao daemonset para identificação
+    app: node-exporter-daemonset #Rotulo "app" com o valor "node-exporter-daemonset"
+  name: node-exporter-daemonset # Nome do daemonset
+spec: #Especificações do daemonset chamado node-exporter-daemonset
+  selector: #seleciona os nós nos quis o daemonset deve ser executado
+    matchLabels: #Define as correspondencias de rotulos para selicionar os nós.
+      app: node-exporter-daemonset #Corresponde ao rotulo "app" como o valor "node-exporter-daemonset"
+  template: #Template para os pods gerados pelo Daemonset
+    metadata: #Metadados do pod template
+      labels: #Rotulos aplicados aos pods criados
+        app: node-exporter-daemonset #rotulo "app" com o valor "node-exporter-daemonset"
+    spec: #Especificações do pod template
+      hostNetwork: true #Indica se o pod deve usar a pilha de rede do host
+      containers: #Lista de containers dno pod
+        - name: node-exporter #Nome do container
+          image: prom/node-exporter:latest #Imagem do container a ser usada
+          ports: #Lista de postas a serem expostas pelo container
+          - containerPort: 9100 #Porta que o container esta executando
+            hostPort: 9100 #Porta do host para redirecionamento de trafego
+          volumeMounts: # Lista de montagens de volume para o container.
+            - mountPath: /host/proc # Caminho dentro do container onde o volume será montado.
+              name: proc # Nome do volume.
+              readOnly: true # Indica se o volume deve ser montado como somente leitura.
+            - mountPath: /host/sys # Caminho dentro do container onde o volume será montado.
+              name: sys # Nome do volume.
+              readOnly: true # Indica se o volume deve ser montado como somente leitura.
+
+      volumes: # Lista de volumes a serem montados no pod
+        - name: proc # Nome do volume.
+          hostPath: # Tipo de volume que representa um caminho no sistema de arquivos do host
+            path: /proc # Caminho no sistema de arquivos do host a ser montado como volume
+        - name: sys # Nome do volume.
+          hostPath: # Tipo de volume que representa um caminho no sistema de arquivos do host
+            path: /sys # Caminho no sistema de arquivos do host a ser montado como volume.
+

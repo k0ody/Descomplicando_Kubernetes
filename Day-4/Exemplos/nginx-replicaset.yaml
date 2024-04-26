@@ -1,0 +1,26 @@
+apiVersion: apps/v1  # Versão da API do Kubernetes utilizada para criar este recurso.
+kind: ReplicaSet  # Tipo de recurso do Kubernetes responsável por garantir um número específico de réplicas de pods.
+metadata:  # Metadados do ReplicaSet.
+  labels:  # Rótulos aplicados ao ReplicaSet para identificação.
+    app: nginx-app  # Rótulo "app" com o valor "nginx-app".
+  name: nginx-replicaset  # Nome do ReplicaSet.
+spec:  # Especificações do ReplicaSet.
+  replicas: 3  # Número de réplicas desejadas para o conjunto de réplicas.
+  selector:  # Seleciona os pods gerenciados por este ReplicaSet.
+    matchLabels:  # Define as correspondências de rótulos para selecionar os pods.
+      app: nginx-app  # Corresponde ao rótulo "app" com o valor "nginx-app".
+  template:  # Template para os pods gerados pelo ReplicaSet.
+    metadata:  # Metadados do pod template.
+      labels:  # Rótulos aplicados aos pods criados.
+        app: nginx-app  # Rótulo "app" com o valor "nginx-app".
+    spec:  # Especificações do pod template.
+      containers:  # Lista de containers no pod.
+        - name: nginx  # Nome do container.
+          image: nginx:1.18  # Imagem do container a ser usada.
+          resources:  # Recursos de computação atribuídos ao container.
+            limits:  # Limites máximos de recursos que o container pode usar.
+              cpu: "0.5"  # Limite máximo de uso de CPU pelo container.
+              memory: 256Mi  # Limite máximo de uso de memória pelo container.
+            requests:  # Recursos mínimos requeridos pelo container.
+               cpu: "0.5"  # Quantidade mínima de CPU solicitada pelo container.
+               memory: 128Mi  # Quantidade mínima de memória solicitada pelo container.
