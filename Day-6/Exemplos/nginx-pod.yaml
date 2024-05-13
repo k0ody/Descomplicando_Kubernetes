@@ -1,0 +1,17 @@
+apiVersion: v1  # Versão da API do Kubernetes para o recurso Pod
+kind: Pod  # Tipo de recurso sendo definido, neste caso, um Pod
+metadata:  # Metadados do recurso
+  name: nginx-pod  # Nome do Pod, neste caso, "nginx-pod"
+spec:  # Especificações do Pod
+  containers:  # Lista de contêineres no Pod
+    - name: nginx  # Nome do contêiner
+      image: nginx  # Imagem Docker a ser usada no contêiner
+      ports:  # Lista de portas do contêiner
+        - containerPort: 80  # Porta do contêiner que será exposta
+      volumeMounts:  # Montagens de volume para o contêiner
+        - mountPath: /usr/share/nginx/html  # Caminho de montagem no contêiner
+          name: meu-pvc  # Nome do volume a ser montado
+  volumes:  # Lista de volumes a serem utilizados pelo Pod
+    - name: meu-pvc  # Nome do volume
+      persistentVolumeClaim:  # Reivindicação de volume persistente (PVC)
+        claimName: meu-pvc  # Nome da reivindicação de volume persistente

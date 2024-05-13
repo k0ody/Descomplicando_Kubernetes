@@ -1,0 +1,28 @@
+apiVersion: apps/v1  # Versão da API do Kubernetes para o recurso Deployment
+kind: Deployment  # Tipo de recurso sendo definido, neste caso, um Deployment
+metadata:  # Metadados do recurso
+  labels:  # Etiquetas para identificar o recurso
+    app: redis  # Etiqueta "app" com valor "redis"
+  name: redis-deployment  # Nome do Deployment, neste caso, "redis-deployment"
+spec:  # Especificações do Deployment
+  replicas: 1  # Número de réplicas desejadas do pod
+  selector:  # Seletor para determinar quais pods são controlados por este Deployment
+    matchLabels:  # Corresponde às etiquetas especificadas
+      app: redis  # Etiqueta "app" com valor "redis"
+  template:  # Modelo para criar novos pods
+    metadata:  # Metadados do modelo
+      labels:  # Etiquetas para identificar os pods criados
+        app: redis  # Etiqueta "app" com valor "redis"
+    spec:  # Especificações do pod
+      containers:  # Lista de contêineres no pod
+        - name: redis  # Nome do contêiner
+          image: redis  # Imagem Docker a ser usada no contêiner
+          ports:  # Lista de portas do contêiner
+            - containerPort: 6379  # Porta do contêiner que será exposta
+          volumeMounts:  # Montagens de volume para o contêiner
+            - mountPath: /data  # Caminho de montagem no contêiner
+              name: redis-data  # Nome do volume a ser montado
+      volumes:  # Lista de volumes a serem utilizados pelo pod
+        - name: redis-data  # Nome do volume
+          persistentVolumeClaim:  # Reivindicação de volume persistente (PVC)
+            claimName: meu-pvc  # Nome da reivindicação de volume persistente

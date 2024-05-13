@@ -1,0 +1,7 @@
+apiVersion: storage.k8s.io/v1  # Versão da API do Kubernetes para o recurso StorageClass
+kind: StorageClass  # Tipo de recurso sendo definido, neste caso, uma StorageClass
+metadata:  # Metadados do recurso
+  name: giropops  # Nome da StorageClass, neste caso, "giropops"
+provisioner: kubernetes.io/no-provisioner  # Provedor de provisionamento, indica que nenhum provisionador será usado
+reclaimPolicy: Retain  # Política de recuperação, que neste caso é "Retain"
+volumeBindingMode: WaitForFirstConsumer  # Modo de associação de volume, que espera pelo primeiro consumidor
