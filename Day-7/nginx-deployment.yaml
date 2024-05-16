@@ -1,0 +1,21 @@
+apiVersion: apps/v1  # Versão da API Kubernetes usada para definir o recurso (neste caso, é a API de aplicativos).
+kind: Deployment  # Tipo de recurso sendo definido, neste caso, uma implantação.
+metadata:  # Metadados associados à implantação.
+  name: nginx  # Nome atribuído à implantação.
+spec:  # Especificações da implantação.
+  replicas: 3  # Número desejado de réplicas (pods) a serem mantidos em execução.
+  selector:  # Seletor usado para encontrar os pods gerenciados por esta implantação.
+    matchLabels:  # Seleção de pods com base em suas etiquetas.
+      app: nginx  # Etiqueta "app" com valor "nginx".
+  template:  # Modelo para criar novos pods.
+    metadata:  # Metadados associados ao modelo.
+      labels:  # Etiquetas atribuídas aos pods criados com base neste modelo.
+        app: nginx  # Etiqueta "app" com valor "nginx".
+        env: dev  # Etiqueta "env" com valor "dev".
+    spec:  # Especificações do pod.
+      containers:  # Lista de contêineres a serem executados no pod.
+        - name: nginx  # Nome do contêiner.
+          image: nginx  # Imagem Docker usada para criar o contêiner.
+          ports:  # Lista de portas expostas pelo contêiner.
+            - containerPort: 80  # Porta que o contêiner estará ouvindo.
+              name: http  # Nome da porta, neste caso, "http".

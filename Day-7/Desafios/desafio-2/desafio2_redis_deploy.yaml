@@ -1,0 +1,21 @@
+apiVersion: apps/v1  # Versão da API Kubernetes usada para definir o recurso (neste caso, é a API de Deployments).
+kind: Deployment  # Tipo de recurso sendo definido, neste caso, um Deployment.
+metadata:  # Metadados associados ao Deployment.
+  labels:  # Etiquetas associadas ao Deployment para identificação e seleção.
+    app: redis  # Etiqueta "app" com valor "redis".
+  name: redis-deployment  # Nome atribuído ao Deployment.
+spec:  # Especificações do Deployment.
+  replicas: 1  # Número desejado de réplicas (pods) a serem mantidos em execução.
+  selector:  # Seletor usado para encontrar os pods gerenciados por este Deployment.
+    matchLabels:  # Seleção de pods com base em suas etiquetas.
+      app: redis  # Etiqueta "app" com valor "redis".
+  template:  # Modelo para criar novos pods.
+    metadata:  # Metadados associados ao modelo.
+      labels:  # Etiquetas atribuídas aos pods criados com base neste modelo.
+        app: redis  # Etiqueta "app" com valor "redis".
+    spec:  # Especificações do pod.
+      containers:  # Lista de contêineres a serem executados no pod.
+      - image: redis  # Imagem Docker usada para criar o contêiner.
+        name: redis  # Nome do contêiner.
+        ports:  # Lista de portas expostas pelo contêiner.
+          - containerPort: 6379  # Porta que o contêiner estará ouvindo (porta padrão do Redis).

@@ -1,0 +1,13 @@
+apiVersion: v1  # Versão da API Kubernetes usada para definir o recurso (neste caso, é a API de serviços).
+kind: Service  # Tipo de recurso sendo definido, neste caso, um serviço.
+metadata:  # Metadados associados ao serviço.
+  name: nginx  # Nome atribuído ao serviço.
+  labels:  # Etiquetas associadas ao serviço para identificação e seleção.
+    app: nginx  # Etiqueta "app" com valor "nginx".
+spec:  # Especificações do serviço.
+  ports:  # Lista de portas expostas pelo serviço.
+  - port: 80  # Porta exposta pelo serviço.
+    name: http  # Nome da porta, neste caso, "http".
+  clusterIP: None  # Define que o serviço não terá um IP de cluster atribuído.
+  selector:  # Seletor usado para encontrar os pods que este serviço irá direcionar o tráfego.
+    app: nginx  # Seletor para encontrar os pods com a etiqueta "app: nginx".

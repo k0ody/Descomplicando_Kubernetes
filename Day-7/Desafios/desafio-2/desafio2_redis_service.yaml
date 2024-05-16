@@ -1,0 +1,12 @@
+apiVersion: v1  # Versão da API Kubernetes usada para definir o recurso (neste caso, é a API de serviços).
+kind: Service  # Tipo de recurso sendo definido, neste caso, um serviço.
+metadata:  # Metadados associados ao serviço.
+  name: redis-service  # Nome atribuído ao serviço.
+spec:  # Especificações do serviço.
+  selector:  # Seletor usado para encontrar os pods que este serviço irá direcionar o tráfego.
+    app: redis  # Seletor para encontrar os pods com a etiqueta "app: redis".
+  ports:  # Lista de portas expostas pelo serviço.
+    - protocol: TCP  # Protocolo da porta exposta.
+      port: 6379  # Porta exposta pelo serviço.
+      targetPort: 6379  # Porta nos pods selecionados para enviar tráfego.
+  type: ClusterIP  # Tipo de serviço, neste caso, ClusterIP, que cria um IP interno para acessar o serviço dentro do cluster.

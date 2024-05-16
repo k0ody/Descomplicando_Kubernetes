@@ -1,0 +1,22 @@
+apiVersion: apps/v1  # Versão da API Kubernetes usada para definir o recurso (neste caso, é a API de Deployments).
+kind: Deployment  # Tipo de recurso sendo definido, neste caso, um Deployment.
+metadata:  # Metadados associados ao Deployment.
+  labels:  # Etiquetas associadas ao Deployment para identificação e seleção.
+    app: giropops-senhas  # Etiqueta "app" com valor "giropops-senhas".
+  name: giropops-senhas  # Nome atribuído ao Deployment.
+spec:  # Especificações do Deployment.
+  replicas: 2  # Número desejado de réplicas (pods) a serem mantidos em execução.
+  selector:  # Seletor usado para encontrar os pods gerenciados por este Deployment.
+    matchLabels:  # Seleção de pods com base em suas etiquetas.
+      app: giropops-senhas  # Etiqueta "app" com valor "giropops-senhas".
+  template:  # Modelo para criar novos pods.
+    metadata:  # Metadados associados ao modelo.
+      labels:  # Etiquetas atribuídas aos pods criados com base neste modelo.
+        app: giropops-senhas  # Etiqueta "app" com valor "giropops-senhas".
+    spec:  # Especificações do pod.
+      containers:  # Lista de contêineres a serem executados no pod.
+      - image: linuxtips/giropops-senhas:1.0  # Imagem Docker usada para criar o contêiner.
+        name: giropops-senhas  # Nome do contêiner.
+        ports:  # Lista de portas expostas pelo contêiner.
+        - containerPort: 5000  # Porta que o contêiner estará ouvindo.
+        imagePullPolicy: Always  # Política de recuperação da imagem, que indica ao Kubernetes para sempre buscar a imagem mais recente.

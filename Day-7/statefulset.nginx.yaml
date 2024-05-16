@@ -1,0 +1,32 @@
+apiVersion: apps/v1  # Versão da API Kubernetes usada para definir o recurso (neste caso, é a API de StatefulSets).
+kind: StatefulSet  # Tipo de recurso sendo definido, neste caso, um StatefulSet.
+metadata:  # Metadados associados ao StatefulSet.
+  name: nginx  # Nome atribuído ao StatefulSet.
+spec:  # Especificações do StatefulSet.
+  serviceName: "nginx"  # Nome do serviço associado ao StatefulSet.
+  replicas: 3  # Número desejado de réplicas (pods) a serem mantidos em execução.
+  selector:  # Seletor usado para encontrar os pods gerenciados por este StatefulSet.
+    matchLabels:  # Seleção de pods com base em suas etiquetas.
+      app: nginx  # Etiqueta "app" com valor "nginx".
+  template:  # Modelo para criar novos pods.
+    metadata:  # Metadados associados ao modelo.
+      labels:  # Etiquetas atribuídas aos pods criados com base neste modelo.
+        app: nginx  # Etiqueta "app" com valor "nginx".
+    spec:  # Especificações do pod.
+      containers:  # Lista de contêineres a serem executados no pod.
+      - name: nginx  # Nome do contêiner.
+        image: nginx  # Imagem Docker usada para criar o contêiner.
+        ports:  # Lista de portas expostas pelo contêiner.
+          - containerPort: 80  # Porta que o contêiner estará ouvindo.
+            name: http  # Nome da porta, neste caso, "http".
+        volumeMounts:  # Lista de volumes montados pelo contêiner.
+          - mountPath: /usr/share/nginx/html  # Caminho onde o volume será montado dentro do contêiner.
+            name: nginx-persistent-storage  # Nome do volume que será montado.
+  volumeClaimTemplates:  # Lista de templates para reivindicação de volumes persistentes.
+    - metadata:  # Metadados associados ao template de reivindicação de volume.
+        name: nginx-persistent-storage  # Nome do volume reivindicado.
+      spec:  # Especificações da reivindicação de volume.
+        accessModes: [ "ReadWriteOnce" ]  # Modos de acesso ao volume (leitura/gravação).
+        resources:  # Recursos solicitados para o volume.
+          requests:  # Recursos solicitados.
+            storage: 1Gi  # Capacidade de armazenamento solicitada para o volume (1 gigabyte).

@@ -1,0 +1,16 @@
+apiVersion: v1  # Versão da API Kubernetes usada para definir o recurso (neste caso, é a API de serviços).
+kind: Service  # Tipo de recurso sendo definido, neste caso, um serviço.
+metadata:  # Metadados associados ao serviço.
+  name: giropops-senhas  # Nome atribuído ao serviço.
+  labels:  # Etiquetas associadas ao serviço para identificação e seleção.
+    app: giropops-senhas  # Etiqueta "app" com valor "giropops-senhas".
+spec:  # Especificações do serviço.
+  selector:  # Seletor usado para encontrar os pods que este serviço irá direcionar o tráfego.
+    app: giropops-senhas  # Seletor para encontrar os pods com a etiqueta "app: giropops-senhas".
+  ports:  # Lista de portas expostas pelo serviço.
+    - protocol: TCP  # Protocolo da porta exposta.
+      port: 5000  # Porta exposta pelo serviço.
+      nodePort: 32500  # Porta no nó do Kubernetes para expor o serviço externamente.
+      targetPort: 5000  # Porta nos pods selecionados para enviar tráfego.
+      name: tcp-app  # Nome da porta, neste caso, "tcp-app".
+  type: NodePort  # Tipo de serviço, neste caso, NodePort, que expõe o serviço em uma porta fixa em cada nó do cluster.
