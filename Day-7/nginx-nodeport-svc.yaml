@@ -9,8 +9,8 @@ spec:  # Especificações do serviço.
   selector:  # Seletor usado para encontrar os pods que este serviço irá direcionar o tráfego.
     app: nginx  # Seletor para encontrar os pods com a etiqueta "app: nginx".
   ports:  # Lista de portas expostas pelo serviço.
-    - port: 80  # Porta exposta pelo serviço.
+    - port: 443  # Porta exposta pelo serviço.
       name: http  # Nome da porta, neste caso, "http".
-      targetPort: 80  # Porta nos pods selecionados para enviar tráfego, neste caso, a porta 80.
-      nodePort: 32000  # Porta no nó do Kubernetes para expor o serviço externamente.
+      targetPort: 443  # Porta nos pods selecionados para enviar tráfego, neste caso, a porta 80.
+      nodePort: 3000  # Porta no nó do Kubernetes para expor o serviço externamente.
   type: NodePort  # Tipo de serviço, neste caso, NodePort, que expõe o serviço em uma porta fixa em cada nó do cluster.
