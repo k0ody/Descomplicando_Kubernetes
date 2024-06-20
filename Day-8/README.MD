@@ -344,4 +344,4 @@ Hoje exploramos como usar **Secrets** e **ConfigMaps** no Kubernetes, criando ex
 
 ---
 
-Espero que esta documentação tenha sido útil e que você tenha compreendido como utilizar esses recursos no Kubernetes. Vejo você no próximo dia! 👋 ✌️
+Espero que esta documentação tenha sido útil e que você tenha compreendido como utilizar esses recursos no Kubernetes.
