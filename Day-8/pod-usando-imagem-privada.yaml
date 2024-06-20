@@ -1,10 +1,10 @@
-apiVersion: v1
-kind: Pod
+apiVersion: v1  # Define a versão da API que está sendo usada. Neste caso, é a versão "v1" da API do Kubernetes.
+kind: Pod  # Especifica o tipo de objeto que está sendo criado. Aqui, estamos criando um objeto do tipo "Pod".
 metadata:
-  name: meu-pod
+  name: meu-pod  # Define o nome do Pod, que é "meu-pod".
 spec:
-  containers:
-    - name: meu-container
-      image: linuxtips/teste-privado:1.0
-  imagePullSecrets:
-    - name: dockerhub-test
+  containers:  # Define a lista de containers que serão executados no Pod.
+    - name: meu-container  # Nome do container dentro do Pod.
+      image: linuxtips/teste-privado:1.0  # Especifica a imagem do container. Neste caso, é uma imagem privada "linuxtips/teste-privado" na versão "1.0".
+  imagePullSecrets:  # Define os secrets usados para autenticação ao fazer o pull de imagens privadas.
+    - name: dockerhub-test  # Nome do Secret que contém as credenciais para acessar o repositório de imagens Docker.
