@@ -1,3 +1,0 @@
-[submodule "day-9/kube-prometheus"]
-	path = day-9/kube-prometheus
-	url = https://github.com/prometheus-operator/kube-prometheus
