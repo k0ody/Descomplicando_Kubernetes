@@ -1,0 +1,12 @@
+apiVersion: v1  # Define a versão da API do Kubernetes que estamos usando
+kind: Service  # Especifica que o objeto a ser criado é um Service
+metadata:
+  name: nginx-service  # Nome do Service
+  labels:
+    app: nginx  # Rótulo do Service, útil para seleção e organização
+spec:
+  ports:
+    - port: 9113  # Porta exposta pelo Service
+      name: metrics  # Nome da porta exposta (métricas)
+  selector:
+    app: nginx  # Seleciona os Pods que correspondem a este rótulo (app: nginx)

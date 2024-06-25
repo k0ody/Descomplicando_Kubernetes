@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1  # Define a versão da API do Kubernetes usada para o PodMonitor
+kind: PodMonitor  # Especifica que o objeto a ser criado é um PodMonitor
+metadata:
+  name: nginx-podmonitor  # Nome do PodMonitor
+  labels:
+    app: nginx-pod  # Rótulo do PodMonitor, útil para seleção e organização
+spec:
+  namespaceSelector:
+    matchNames:
+      - default  # Seleciona o namespace 'default' para monitoramento
+  selector:
+    matchLabels:
+      app: nginx-pod  # Seleciona os Pods com o rótulo 'app: nginx-pod' para monitoramento
+  podMetricsEndpoints:
+    - interval: 10s  # Define o intervalo de scraping das métricas como 10 segundos
+      path: /metrics  # Define o caminho onde as métricas estão expostas no Pod
+      targetPort: 9113  # Define a porta alvo no Pod onde as métricas estão expostas

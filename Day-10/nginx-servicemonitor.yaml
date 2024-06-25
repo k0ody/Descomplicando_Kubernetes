@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1  # Define a versão da API do Kubernetes usada para o ServiceMonitor
+kind: ServiceMonitor  # Especifica que o objeto a ser criado é um ServiceMonitor
+metadata:
+  name: nginx-servicemonitor  # Nome do ServiceMonitor
+  labels:
+    app: nginx  # Rótulo do ServiceMonitor, útil para seleção e organização
+spec:
+  selector:
+    matchLabels:
+      app: nginx  # Seleciona os endpoints (serviços) que correspondem a este rótulo (app: nginx)
+  endpoints:
+    - interval: 10s  # Intervalo de tempo entre as verificações dos endpoints (10 segundos)
+      path: /metrics  # Caminho onde as métricas são expostas pelo serviço a ser monitorado
+      targetPort: 9113  # Porta onde as métricas estão expostas no serviço a ser monitorado

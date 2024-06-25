@@ -1,0 +1,30 @@
+apiVersion: monitoring.coreos.com/v1  # Define a versão da API do Kubernetes usada para o PrometheusRule
+kind: PrometheusRule  # Especifica que o objeto a ser criado é um PrometheusRule
+metadata:
+  name: nginx-prometheus-rule  # Nome do PrometheusRule
+  namespace: monitoring  # Namespace onde o PrometheusRule está localizado
+  labels:
+    prometheus: k8s  # Rótulo indicando que este PrometheusRule pertence ao Prometheus 'k8s'
+    role: alert-rules  # Rótulo indicando o papel deste PrometheusRule como regras de alerta
+    app.kubernetes.io/name: kube-prometheus  # Rótulo indicando que este PrometheusRule faz parte do aplicativo 'kube-prometheus'
+    app.kubernetes.io/part-of: kube-prometheus  # Rótulo indicando que este PrometheusRule faz parte do aplicativo 'kube-prometheus'
+spec:
+  groups:  # Lista de grupos de regras dentro deste PrometheusRule
+  - name: nginx-prometheus-rule  # Nome do grupo de regras
+    rules:  # Lista de regras dentro do grupo
+    - alert: NginxDown  # Nome do alerta
+      expr: nginx_up == 0  # Expressão de Prometheus que define a condição para disparar o alerta (Nginx está fora)
+      for: 1m  # Tempo mínimo que a condição deve ser verdadeira antes de disparar o alerta (1 minuto)
+      labels:  # Rótulos associados ao alerta
+        severity: critical  # Severidade do alerta (crítico)
+      annotations:  # Anotações associadas ao alerta
+        summary: "Nginx está fora"  # Resumo do alerta
+        description: "Nosso servidor web nginx está fora!"  # Descrição detalhada do alerta
+    - alert: NginxHighRequestRate  # Nome do alerta
+      expr: rate(nginx_http_requests_total[5m]) > 10  # Expressão de Prometheus que define a condição para disparar o alerta (taxa alta de requisições ao Nginx)
+      for: 1m  # Tempo mínimo que a condição deve ser verdadeira antes de disparar o alerta (1 minuto)
+      labels:  # Rótulos associados ao alerta
+        severity: warning  # Severidade do alerta (aviso)
+      annotations:  # Anotações associadas ao alerta
+        summary: "O nginx está recebendo um número alto de requisições"  # Resumo do alerta
+        description: "Nginx está recebendo muitas requisições, o que pode indicar tráfego anormal."  # Descrição detalhada do alerta
