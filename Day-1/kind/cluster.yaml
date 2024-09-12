@@ -7,8 +7,9 @@ apiVersion: kind.x-k8s.io/v1alpha4
 # Configuração dos nós do cluster
 nodes:
   # Nó com papel de control-plane (nó mestre)
-  - role: control-plane
-  # Nó com papel de worker (nó de trabalho)
-  - role: worker
-  - role: worker
-  
+- role: control-plane
+  image: kindest/node:v1.30.0
+- role: worker
+  image: kindest/node:v1.30.0
+- role: worker
+  image: kindest/node:v1.30.0
